@@ -1,6 +1,6 @@
 
 //Making test object 
-const todos = [
+let todos = [
     {
         _id: "1",
         description: "I have to wake up",
@@ -57,5 +57,13 @@ module.exports.addTodo = function(req, res){
 }
 
 module.exports.deleteTodo = function(req, res){
+
+    const todosLeft = todos.filter(todo=>todo._id != req.query._id);
+
+    // console.log(todosLeft);
+
+    todos = todosLeft;
+
+    return res.send();
 
 }
