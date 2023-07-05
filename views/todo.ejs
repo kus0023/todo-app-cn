@@ -5,11 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
 
-    <link rel="stylesheet" href="../static/todo.css">
+    <link rel="stylesheet" href="todo.css">
 </head>
 <body>
 
-    <h1>Todo App</h1>
+    <header>
+        <h1>Todo App</h1>
+    </header>
+    <hr>
+    <main>
+
+        <section id="todo-form">
+            <form action="/todo" method="post">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" placeholder="What do you need to do?">
+    
+    
+                <label for="category">Category</label>
+                <select name="Category" id="category">
+                    <option value="">Choose a category</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+                    <option value="School">School</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Other">Other</option>
+                </select>
+    
+                <label for="due-date">Due Date</label>
+                <input type="date" name="due_date" id="due-date">
+
+                <button type="submit">Add Todo</button>
+            </form>
+        </section>
+        
+<hr>
+        <section id="todo-list-section">
+            <label for="todo-list">You have below items</label>
+            <button type="button">Delete Todo</button>
+            <ul id="todo-list">
+                <li>
+                    
+                    <div class="container-card">
+                        <input type="checkbox" name="card_id234" id="card234567">
+                        <div class="description-card">Description Demo</div>
+                        <div class="category-card">Category</div>
+                        <div class="duedate-card">10/12/2023</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
     
 </body>
 </html>
