@@ -1,3 +1,5 @@
+const todo = require('../models/todo_model');
+
 
 //Making test object 
 let todos = [
@@ -31,36 +33,37 @@ let todos = [
     },
 ];
 
-module.exports.todo = function (req, res){
+module.exports.todo = function (req, res) {
 
-    return res.render('todo', {todos});
+    return res.render('todo', { todos });
 }
 
 
-module.exports.addTodo = function(req, res){
+module.exports.addTodo = async function (req, res) {
 
-    //Just a typical way of handling ID this will be easier with databases.
-    //Mimicing the database _id feature.
-    if(todos.length === 0){
-        todos.push({
-            _id: "1",
-            ...req.body
-        })
-    }else{
-        const lastId = todos[todos.length-1]._id
-        const nextId = parseInt(lastId) + 1;
-        req.body._id = nextId+"";
-        todos.push(req.body);
+    try {
+        const doc = await todo.create(req.body);
+
+        const result = await doc.save();
+
+        console.log(result);
+
+        return res.redirect('/');
+
+    } catch (error) {
+
+        console.log("Error while inserting doc ", error);
+        return res.redirect('/');
     }
 
-    return res.redirect('/');
+
 }
 
-module.exports.deleteTodo = function(req, res){
+module.exports.deleteTodo = function (req, res) {
 
     // console.log(req.query);
 
-    const todosLeft = todos.filter(todo=>todo._id != req.query._id);
+    const todosLeft = todos.filter(todo => todo._id != req.query._id);
 
     todos = todosLeft;
 
