@@ -1,5 +1,8 @@
 const express = require("express");
 
+//mongoose setup 
+require('./config/db');
+
 //Global variables
 const PORT = 8000;
 const app = express();
