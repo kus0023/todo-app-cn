@@ -44,15 +44,27 @@
         <section id="todo-list-section">
             <label for="todo-list">You have below items</label>
             <button type="button">Delete Todo</button>
+            
             <ul id="todo-list">
-                <li>
-                    <input type="checkbox" name="card_id234" id="card234567">
-                    <div class="container-card">
-                        <div class="description-card">Description Demo</div>
-                        <div class="category-card">Category</div>
-                        <div class="duedate-card">10/12/2023</div>
-                    </div>
-                </li>
+
+                <% for ( todo of todos ) { %>
+                    <li>
+
+                        <!-- Based on the data of todo wheather it is completed or not we can render the if checkbox is checked or not -->
+                        <!-- Issue: we can not have  -->
+                        <% if(todo.completed) { %>
+                            <input type="checkbox" name=<%= todo._id %> id=<%= todo._id %>  checked>
+                        <% } else {%>
+                            <input type="checkbox" name=<%= todo._id %> id=<%= todo._id %> >
+                        <% } %> 
+
+                        <div class="container-card <%= todo.completed ? "strike": ""  %> " >
+                            <div class="description-card"> <%= todo.description %> </div>
+                            <div class="category-card"><%= todo.category %></div>
+                            <div class="duedate-card"><%= todo.due_date %></div>
+                        </div>
+                    </li>
+                <% } %>
             </ul>
         </section>
     </main>
