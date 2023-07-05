@@ -58,9 +58,9 @@ module.exports.addTodo = function(req, res){
 
 module.exports.deleteTodo = function(req, res){
 
-    const todosLeft = todos.filter(todo=>todo._id != req.query._id);
+    // console.log(req.query);
 
-    // console.log(todosLeft);
+    const todosLeft = todos.filter(todo=>todo._id != req.query._id);
 
     todos = todosLeft;
 

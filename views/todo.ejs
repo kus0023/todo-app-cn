@@ -43,7 +43,7 @@
         <hr>
         <section id="todo-list-section">
             <label for="todo-list">You have below items</label>
-            <button type="button">Delete Todo</button>
+            <button type="button" onclick="handleDeleteButton()" >Delete Todo</button>
             
             <ul id="todo-list">
 
@@ -73,7 +73,6 @@
 </body>
 
 <script>
-    (() => {
 
         document.querySelectorAll('#todo-list input').forEach(e => {
             e.addEventListener('click', (e) => {
@@ -83,8 +82,8 @@
         })
 
         //This function will get all the checked input in the todo list.
-        //It will be used when I have to delete all the checked boxes with button click.
-        function getAllCheckedInput() {
+        //It will be used when I have to delete all the checked boxes with button click. See handleDeleteButton() function below.
+        function getAllCheckedInputId() {
             const inputs = document.querySelectorAll('#todo-list input');
 
             // console.log(inputs);
@@ -92,14 +91,44 @@
             const checkedInputsId = [];
 
             for (let input of inputs) {
-                checkedInputsId.push(input.id);
+                //If input has checked attribute then this will be true other false
+                if(input.checked)
+                    checkedInputsId.push(input.id);
             }
 
             // console.log(checkedInputsId);
             return checkedInputsId;
         }
 
-    })();
+        function handleDeleteButton(){
+            // console.log("Initiating Deletion...");
+            const todoIds = getAllCheckedInputId();
+
+            if(todoIds.length == 0){
+                return;
+            }
+
+            todoIds.forEach(async (id)=>{
+                
+                try {
+                    const res = await fetch("http://localhost:8000/todo?_id="+id, {method: 'Delete'});
+                    
+                    if(res.status == 200){
+                        console.log("Deleted id: ", id);
+                    }
+                    
+                } catch (error) {
+                    console.log("Unable to delete id: ", id);
+                    console.log("Error:", error);
+                }
+                
+            });
+
+            //reload the page after deletion.
+            location.reload();
+        }
+
+
 </script>
 
 </html>

@@ -10,6 +10,6 @@ router.get('/', todoController.todo);
 
 router.post('/todo', todoController.addTodo);
 
-router.get('/todo', todoController.deleteTodo);
+router.delete('/todo', todoController.deleteTodo);
 
 module.exports = router;
