@@ -1,2 +1,15 @@
+/* Cutome styles */
+.strike{
+    text-decoration: line-through;
+}
+
+
 body{
+}
+
+/* Todo list items */
+
+.container-card{
+    display: inline-block;
+    
 }
