@@ -1,37 +1,6 @@
 const todo = require('../models/todo_model');
 
 
-//Making test object 
-let todos = [
-    {
-        _id: "1",
-        description: "I have to wake up",
-        due_date: "10/20/2924",
-        category: "Sleep",
-        completed: false
-    },
-    {
-        _id: "2",
-        description: "Complete Homework",
-        due_date: "10/20/2924",
-        category: "School",
-        completed: true
-    },
-    {
-        _id: "3",
-        description: "Hair cut",
-        due_date: "10/20/2924",
-        category: "Cleaning",
-        completed: false
-    },
-    {
-        _id: "4",
-        description: "Diary update",
-        due_date: "10/20/2924",
-        category: "Habbit",
-        completed: true
-    },
-];
 
 module.exports.todo = async function (req, res) {
 
@@ -42,6 +11,7 @@ module.exports.todo = async function (req, res) {
         
     }catch(error){
         console.log("error fetching todo: ", error);
+        return res.render('todo', {todos, error});
     }
 
     
@@ -68,14 +38,24 @@ module.exports.addTodo = async function (req, res) {
 
 }
 
-module.exports.deleteTodo = function (req, res) {
+module.exports.deleteTodo = async function (req, res) {
 
-    // console.log(req.query);
+    try {
+        //fetch the doc with id and delete the data.
+        const result = todo.findByIdAndDelete(req.query._id);
 
-    const todosLeft = todos.filter(todo => todo._id != req.query._id);
+        //result will have query only.
 
-    todos = todosLeft;
+        //executed the query
 
-    return res.send();
+        const doc = await result.exec();
 
+        console.log(doc);
+
+        return res.json({status: "deleted"});
+    } catch (error) {
+        console.log("Error in deleting todo", error);
+        return res.json({error: "Not deleted."})
+    }
+    
 }
