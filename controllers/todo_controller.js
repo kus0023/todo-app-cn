@@ -33,9 +33,18 @@ let todos = [
     },
 ];
 
-module.exports.todo = function (req, res) {
+module.exports.todo = async function (req, res) {
 
-    return res.render('todo', { todos });
+    try{
+        const todos = await todo.find({});
+        
+        return res.render('todo', { todos });
+        
+    }catch(error){
+        console.log("error fetching todo: ", error);
+    }
+
+    
 }
 
 
