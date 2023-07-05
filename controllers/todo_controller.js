@@ -39,10 +39,23 @@ module.exports.todo = function (req, res){
 
 module.exports.addTodo = function(req, res){
 
-    // console.log("Added Todo", req.body);
-    todos.push(req.body);
+    //Just a typical way of handling ID this will be easier with databases.
+    //Mimicing the database _id feature.
+    if(todos.length === 0){
+        todos.push({
+            _id: "1",
+            ...req.body
+        })
+    }else{
+        const lastId = todos[todos.length-1]._id
+        const nextId = parseInt(lastId) + 1;
+        req.body._id = nextId+"";
+        todos.push(req.body);
+    }
 
-    todos[todos.length-1]._id = todos.length;
+    return res.redirect('/');
+}
 
-    return res.render('todo', {todos});
+module.exports.deleteTodo = function(req, res){
+
 }
