@@ -35,3 +35,14 @@ module.exports.todo = function (req, res){
 
     return res.render('todo', {todos});
 }
+
+
+module.exports.addTodo = function(req, res){
+
+    // console.log("Added Todo", req.body);
+    todos.push(req.body);
+
+    todos[todos.length-1]._id = todos.length;
+
+    return res.render('todo', {todos});
+}

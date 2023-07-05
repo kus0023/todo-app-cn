@@ -20,12 +20,12 @@
         <section id="todo-form">
             <form action="/todo" method="post">
                 <label for="description">Description</label>
-                <input type="text" name="description" id="description" placeholder="What do you need to do?">
+                <input type="text" name="description" id="description" placeholder="What do you need to do?" required>
 
 
                 <label for="category">Category</label>
-                <select name="Category" id="category">
-                    <option value="">Choose a category</option>
+                <select name="category" id="category" required>
+                    <option value="" disabled>Choose a category</option>
                     <option value="Personal">Personal</option>
                     <option value="Work">Work</option>
                     <option value="School">School</option>
@@ -34,7 +34,7 @@
                 </select>
 
                 <label for="due-date">Due Date</label>
-                <input type="date" name="due_date" id="due-date">
+                <input type="date" name="due_date" id="due-date" required>
 
                 <button type="submit">Add Todo</button>
             </form>
@@ -51,7 +51,7 @@
                     <li>
 
                         <!-- Based on the data of todo wheather it is completed or not we can render the if checkbox is checked or not -->
-                        <!-- Issue: we can not have  -->
+                        <!-- Issue: we can not have  conditional operator on checked attribute in input element. -->
                         <% if(todo.completed) { %>
                             <input type="checkbox" name=<%= todo._id %> id=<%= todo._id %>  checked>
                         <% } else {%>
