@@ -8,6 +8,12 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+//static files - Middleware
+app.use(express.static('static'));
+
+//setting up routes folder Default folder index.js inside routes dir.
+app.use('/', require('./routes'));
+
 //server setup
 app.listen(PORT, ()=>{
 
