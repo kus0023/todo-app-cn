@@ -1,15 +1,193 @@
-/* Cutome styles */
-.strike{
+/* body */
+body {
+    background-color: rgb(226, 226, 226);
+}
+
+/* main */
+main {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    padding: 20px 0px;
+}
+
+
+/* Header-section */
+
+#todo-header {
+    /* background-color: aqua; */
+
+    /* Position */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+
+    /* Font */
+    font-size: larger;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: rgb(97, 97, 97);
+}
+
+/* Form section */
+
+.todo-container {
+    border-top: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
+    padding: 5px;
+}
+
+.todo-label {
+    display: block;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    font-size: small;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: rgb(97, 97, 97);
+}
+
+.todo-input {
+    display: block;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    font-size: medium;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+}
+
+/* This will remove outline when user clicks on input box. */
+#description-container>input:focus {
+    outline: none;
+}
+
+/* Positioning the form */
+form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#description-container {
+    flex-basis: 100%;
+}
+
+#category-container {
+
+    flex-basis: 50%;
+    box-sizing: border-box;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+#duedate-container {
+
+    flex-basis: 50%;
+    box-sizing: border-box;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+/* Form Add button */
+#button-container {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* background-color: aquamarine; */
+}
+
+button {
+    padding: 12px 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1abc9c;
+    color: #fff;
+    font-size: large;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+
+    position: relative;
+    overflow: hidden;
+    box-shadow: 6px 4px 40px -4px rgba(0, 0, 0, 0.2);
+}
+
+button[type="button"] {
+    background-color: red;
+}
+
+/* todo List section */
+#todo-list-section{
+    margin: 20px;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0%;
+}
+
+#todo-list li:nth-child(odd){
+    background-color: rgb(241, 241, 241);
+}
+
+#todo-list li {
+    border-bottom: 1px solid gray;
+    display: flex;
+    align-items: center;
+    padding: 5px
+}
+
+.todo-item-input {
+    flex-basis: 10%;
+}
+
+.container-card {
+    flex-basis: 90%;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: medium;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+}
+
+.container-card> *{
+    box-sizing: border-box; 
+    padding: 5px;
+}
+
+.description-card {
+    flex-basis: 70%;
+    padding: 1%;
+}
+
+.category-card {
+    flex-basis: 20%;
+    background-color: lightsalmon;
+    text-align: center;
+}
+
+.duedate-card {
+    flex-basis: 100%;
+    color: gray;
+    padding: 10px;
+}
+
+/* Global property */
+
+.strike {
     text-decoration: line-through;
-}
-
-
-body{
-}
-
-/* Todo list items */
-
-.container-card{
-    display: inline-block;
-    
 }

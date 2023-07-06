@@ -6,45 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+
     <link rel="stylesheet" href="todo.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Todo App</h1>
-    </header>
-    <hr>
     <main>
+
+        <header id="main-header">
+            <section id="todo-header">
+                <h1>Todo App</h1>
+            </section>            
+        </header>
+        
+        
 
         <section id="todo-form">
             <form action="/todo" method="POST">
-                <label for="description">Description</label>
-                <input type="text" name="description" id="description" placeholder="What do you need to do?" required>
+                <div id="description-container" class="todo-container">
+                    <label for="description" class="todo-label">Description</label>
+                    <input class="todo-input" type="text" name="description" id="description" placeholder="What do you need to do?" required>
+                </div>
+                <div id="category-container" class="todo-container">
+                    <label for="category" class="todo-label">Category</label>
+                    <select name="category" id="category" class="todo-input" required>
+                        <option value="" disabled>Choose a category</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="School">School</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
 
-
-                <label for="category">Category</label>
-                <select name="category" id="category" required>
-                    <option value="" disabled>Choose a category</option>
-                    <option value="Personal">Personal</option>
-                    <option value="Work">Work</option>
-                    <option value="School">School</option>
-                    <option value="Cleaning">Cleaning</option>
-                    <option value="Other">Other</option>
-                </select>
-
-                <label for="due-date">Due Date</label>
-                <input type="date" name="due_date" id="due-date" required>
-
-                <button type="submit">Add Todo</button>
+                <div id="duedate-container" class="todo-container">
+                    <label for="due-date" class="todo-label">Due Date</label>
+                    <input type="date" name="due_date" id="due-date" class="todo-input" required>
+                </div>
+                <div id="button-container">
+                    <button type="submit"><i class="fa-solid fa-plus fa-lg"></i> Add Todo</button>
+                    <button type="button" onclick="handleDeleteButton()" ><i class="fa-regular fa-trash-can"></i> Delete Todo</button>
+                </div>
             </form>
         </section>
 
         <hr>
         <section id="todo-list-section">
-            <label for="todo-list">You have below items</label>
-            <button type="button" onclick="handleDeleteButton()" >Delete Todo</button>
-            
+
             <ul id="todo-list">
 
                 <% for ( todo of todos ) { %>
@@ -53,15 +66,15 @@
                         <!-- Based on the data of todo wheather it is completed or not we can render the if checkbox is checked or not -->
                         <!-- Issue: we can not have  conditional operator on checked attribute in input element. -->
                         <% if(todo.completed) { %>
-                            <input type="checkbox" name=<%= todo._id %> id=<%= todo._id %>  checked>
+                            <input class="todo-item-input" type="checkbox" name=<%= todo._id %> id=<%= todo._id %>  checked>
                         <% } else {%>
-                            <input type="checkbox" name=<%= todo._id %> id=<%= todo._id %> >
+                            <input class="todo-item-input" type="checkbox" name=<%= todo._id %> id=<%= todo._id %> >
                         <% } %> 
 
                         <div class="container-card <%= todo.completed ? "strike": ""  %> " >
                             <div class="description-card"> <%= todo.description %> </div>
                             <div class="category-card"><%= todo.category %></div>
-                            <div class="duedate-card"><%= todo.due_date %></div>
+                            <div class="duedate-card"><i class="fa-regular fa-calendar"></i> <%= todo.due_date %></div>
                         </div>
                     </li>
                 <% } %>
@@ -116,6 +129,9 @@
                     if(res.status == 200){
                         console.log("Deleted id: ", id);
                     }
+
+                    //reload the page after deletion.
+                    location.reload();
                     
                 } catch (error) {
                     console.log("Unable to delete id: ", id);
@@ -124,8 +140,7 @@
                 
             });
 
-            //reload the page after deletion.
-            location.reload();
+            
         }
 
 
